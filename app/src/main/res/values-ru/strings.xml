@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Гид Московский метрополитен</string>
+    <string name="map">Карта</string>
+    <string name="news">Новости</string>
+    <string name="account">Аккаунт</string>
+    <string name="email">Почта</string>
+    <string name="emailAccount">Почта:</string>
+    <string name="password">Пароль</string>
+    <string name="log">Войти</string>
+    <string name="sign">Регистрация</string>
+    <string name="passwordConfirm">Подтверждение пароля</string>
+    <string name="signOut">Выйти из учетной записи</string>
+    <string name="sendButtonDescription">Иконка</string>
+    <string name="changeLanguage">Сменить язык</string>
+    <string name="back">Назад</string>
+    <string name="fav">Добавить в избранное</string>
+    <string name="novoslobodskaya">Новослободская</string>
+    <string name="prospektMira">Проспект Мира</string>
+    <string name="komsomolskaya">Комсомольская</string>
+    <string name="kurskaya">Курская</string>
+    <string name="taganskaya">Таганская</string>
+    <string name="paveletskaya">Павелецкая</string>
+    <string name="dobryninskaya">Добрынинская</string>
+    <string name="oktyabrskaya">Октябрьская</string>
+    <string name="parkKultury">Парк культуры</string>
+    <string name="kiyevskaya">Киевская</string>
+    <string name="krasnopresnenskaya">Краснопресненская</string>
+    <string name="belorusskaya">Белорусская</string>
+
+</resources>

@@ -1,4 +1,4 @@
-package com.example.guidemetro
+package com.example.guidemetro.presentation.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

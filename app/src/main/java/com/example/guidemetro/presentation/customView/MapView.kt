@@ -1,16 +1,18 @@
-package com.example.guidemetro
+package com.example.guidemetro.presentation.customView
 
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
-import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.guidemetro.R
+import com.example.guidemetro.presentation.fragment.StationFragment
 import kotlin.math.cos
 import kotlin.math.pow
 import kotlin.math.sin
@@ -31,19 +33,17 @@ class MapView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     private val sensitivityX = 0.5f
     private val sensitivityY = 0.5f
 
-    private val stationNames = arrayOf(
-        "Курская", "Таганская", "Павелецкая", "Добрынинская", "Октябрьская",
-        "Парк культуры", "Киевская", "Краснопресненская", "Белорусская", "Новослободская",
-        "Проспект Мира", "Комсомольская"
-    )
-
     private val minScaleFactor = 0.7f
     private val maxScaleFactor = 2.0f
 
     private val mapCenterX: Float
     private val mapCenterY: Float
 
+    private lateinit var stationNames: Array<String>
+
     init {
+        initializeStationNames()
+
         val screenWidth = resources.displayMetrics.widthPixels.toFloat()
         val screenHeight = resources.displayMetrics.heightPixels.toFloat()
         mapCenterX = screenWidth / 2
@@ -61,6 +61,14 @@ class MapView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
         scaleDetector = ScaleGestureDetector(context, ScaleListener())
         gestureDetector = GestureDetector(context, GestureListener())
+    }
+
+    private fun initializeStationNames() {
+        stationNames = arrayOf(
+            context.getString(R.string.kurskaya), context.getString(R.string.taganskaya), context.getString(R.string.paveletskaya), context.getString(R.string.dobryninskaya), context.getString(R.string.oktyabrskaya),
+            context.getString(R.string.parkKultury), context.getString(R.string.kiyevskaya), context.getString(R.string.krasnopresnenskaya), context.getString(R.string.belorusskaya), context.getString(R.string.novoslobodskaya),
+            context.getString(R.string.prospektMira), context.getString(R.string.komsomolskaya)
+        )
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -103,14 +111,14 @@ class MapView(context: Context, attrs: AttributeSet) : View(context, attrs) {
             canvas.drawCircle(x, y, stationRadius / 2, paintStationInner)
 
             when (stationNames[i]) {
-                "Новослободская" -> canvas.drawText(stationNames[i], x - 100, y - 30, paintText)
-                "Добрынинская" -> canvas.drawText(stationNames[i], x - 100, y + 40, paintText)
-                "Павелецкая" -> canvas.drawText(stationNames[i], x, y + 40, paintText)
-                "Октябрьская" -> canvas.drawText(stationNames[i], x - 200, y + 25, paintText)
-                "Парк культуры" -> canvas.drawText(stationNames[i], x - 230, y - 10, paintText)
-                "Киевская" -> canvas.drawText(stationNames[i], x - 150, y - 10, paintText)
-                "Краснопресненская" -> canvas.drawText(stationNames[i], x - 300, y - 10, paintText)
-                "Белорусская" -> canvas.drawText(stationNames[i], x - 200, y - 10, paintText)
+                context.getString(R.string.novoslobodskaya) -> canvas.drawText(stationNames[i], x - 100, y - 30, paintText)
+                context.getString(R.string.dobryninskaya) -> canvas.drawText(stationNames[i], x - 100, y + 40, paintText)
+                context.getString(R.string.paveletskaya) -> canvas.drawText(stationNames[i], x, y + 40, paintText)
+                context.getString(R.string.oktyabrskaya) -> canvas.drawText(stationNames[i], x - 200, y + 25, paintText)
+                context.getString(R.string.parkKultury) -> canvas.drawText(stationNames[i], x - 230, y - 10, paintText)
+                context.getString(R.string.kiyevskaya) -> canvas.drawText(stationNames[i], x - 150, y - 10, paintText)
+                context.getString(R.string.krasnopresnenskaya) -> canvas.drawText(stationNames[i], x - 300, y - 10, paintText)
+                context.getString(R.string.belorusskaya) -> canvas.drawText(stationNames[i], x - 200, y - 10, paintText)
                 else -> canvas.drawText(stationNames[i], x + 20, y, paintText)
             }
             i++
@@ -135,14 +143,17 @@ class MapView(context: Context, attrs: AttributeSet) : View(context, attrs) {
                         sqrt((x - scaledX).toDouble().pow(2) + (y - scaledY).toDouble().pow(2))
                     if (distance <= 30 * scaleFactor) {
                         val stationName = getStationName(x, y)
-                        Log.d("MY_TAG", "$stationName")
-                        showToast("Нажата станция: $stationName")
+                        val fragment = StationFragment.newInstance(stationName)
+                        val transaction = (context as AppCompatActivity).supportFragmentManager.beginTransaction()
+                        transaction.replace(R.id.frameLayout, fragment)
+                        transaction.addToBackStack(null)
+                        transaction.commit()
                         return true
                     }
+
                 }
             }
         }
-
         return true
     }
 
@@ -188,3 +199,4 @@ class MapView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         }
     }
 }
+

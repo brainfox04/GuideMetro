@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1050075872938",
+    "firebase_url": "https://guidemetro-5682f-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "guidemetro-5682f",
+    "storage_bucket": "guidemetro-5682f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1050075872938:android:f210bedbce934f8664dad3",
+        "android_client_info": {
+          "package_name": "com.example.guidemetro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3-BGBBi4W0xHlxYILeEbH30g4wSHYkio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
