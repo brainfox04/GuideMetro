@@ -66,8 +66,8 @@ class MapView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     private fun initializeStationNames() {
         stationNames = arrayOf(
             context.getString(R.string.kurskaya), context.getString(R.string.taganskaya), context.getString(R.string.paveletskaya), context.getString(R.string.dobryninskaya), context.getString(R.string.oktyabrskaya),
-            context.getString(R.string.parkKultury), context.getString(R.string.kiyevskaya), context.getString(R.string.krasnopresnenskaya), context.getString(R.string.belorusskaya), context.getString(R.string.novoslobodskaya),
-            context.getString(R.string.prospektMira), context.getString(R.string.komsomolskaya)
+            context.getString(R.string.parkkultury), context.getString(R.string.kiyevskaya), context.getString(R.string.krasnopresnenskaya), context.getString(R.string.belorusskaya), context.getString(R.string.novoslobodskaya),
+            context.getString(R.string.prospektmira), context.getString(R.string.komsomolskaya)
         )
     }
 
@@ -101,7 +101,7 @@ class MapView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         paintStationInner.style = Paint.Style.FILL
 
         val paintText = Paint()
-        paintText.color = Color.BLACK
+        paintText.setColor(resources.getColor(R.color.md_theme_onBackground))
         paintText.textSize = 30f
         var i = 0
 
@@ -115,7 +115,7 @@ class MapView(context: Context, attrs: AttributeSet) : View(context, attrs) {
                 context.getString(R.string.dobryninskaya) -> canvas.drawText(stationNames[i], x - 100, y + 40, paintText)
                 context.getString(R.string.paveletskaya) -> canvas.drawText(stationNames[i], x, y + 40, paintText)
                 context.getString(R.string.oktyabrskaya) -> canvas.drawText(stationNames[i], x - 200, y + 25, paintText)
-                context.getString(R.string.parkKultury) -> canvas.drawText(stationNames[i], x - 230, y - 10, paintText)
+                context.getString(R.string.parkkultury) -> canvas.drawText(stationNames[i], x - 230, y - 10, paintText)
                 context.getString(R.string.kiyevskaya) -> canvas.drawText(stationNames[i], x - 150, y - 10, paintText)
                 context.getString(R.string.krasnopresnenskaya) -> canvas.drawText(stationNames[i], x - 300, y - 10, paintText)
                 context.getString(R.string.belorusskaya) -> canvas.drawText(stationNames[i], x - 200, y - 10, paintText)

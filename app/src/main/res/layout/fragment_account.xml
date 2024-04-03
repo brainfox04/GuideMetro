@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@color/md_theme_background">
 
     <TextView
         android:id="@+id/newsHeader"
@@ -13,6 +13,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/account"
+        android:textColor="@color/md_theme_primary"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,10 +24,11 @@
         android:id="@+id/switchLanguage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/signOutButton"
+        app:layout_constraintBottom_toTopOf="@id/favoriteButton"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="15dp"
         android:text="Ru"
+        android:textColor="@color/md_theme_primary"
         android:checked="false"
         android:textSize="17sp"
         android:textStyle="bold"/>
@@ -39,10 +41,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:text="En"
+        android:textColor="@color/md_theme_primary"
         android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/signOutButton"
+        app:layout_constraintBottom_toTopOf="@id/favoriteButton"
         app:layout_constraintStart_toEndOf="@id/switchLanguage"/>
 
     <androidx.cardview.widget.CardView
@@ -61,7 +64,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:background="@color/md_theme_primaryContainer">
 
             <ImageView
                 android:id="@+id/userVector"
@@ -76,6 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/emailAccount"
+                android:textColor="@color/md_theme_onSecondaryContainer"
                 android:layout_marginTop="15dp"
                 android:textSize="17sp"
                 app:layout_constraintTop_toBottomOf="@id/userVector"
@@ -86,12 +91,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
+                android:textColor="@color/md_theme_onSecondaryContainer"
                 android:textSize="16sp"
                 app:layout_constraintBaseline_toBaselineOf="@id/Email"
                 app:layout_constraintStart_toEndOf="@id/Email"
                 android:layout_marginStart="10dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <Button
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:id="@+id/favoriteButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/myFavorite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:id="@+id/reviewButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/myReview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favoriteButton"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
         style="@style/Widget.Material3.Button.ElevatedButton"
@@ -102,9 +135,8 @@
         android:layout_marginEnd="15dp"
         android:layout_marginTop="10dp"
         android:text="@string/signOut"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reviewButton"
         app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

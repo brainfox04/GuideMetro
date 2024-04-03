@@ -25,6 +25,10 @@ class FragmentSignUp : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
 
+        binding.backButton.setOnClickListener {
+            replaceFragment(fragment = FragmentLogIn())
+        }
+
         binding.signInButton.setOnClickListener {
             val email = binding.emailField.editText?.text.toString().trim()
             val password = binding.passwordField.editText?.text.toString().trim()

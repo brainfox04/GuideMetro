@@ -16,14 +16,13 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.util.Locale
 
-class StationFragment : Fragment() {
+class FragmentForFavoriteStation : Fragment() {
     private var _binding: FragmentStationBinding? = null
     private val binding get() = _binding!!
 
     private var stationName: String? = null
     private var englishStationName: String? = null
-    private var isLiked = false
-
+    private var isLiked = false // Переменная для отслеживания состояния лайка
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -52,7 +51,7 @@ class StationFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentStationBinding.inflate(inflater, container, false)
+        _binding = FragmentStationBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -99,12 +98,12 @@ class StationFragment : Fragment() {
             }
 
             iconButtonBack.setOnClickListener {
-                replaceFragment(FragmentMap())
+                replaceFragment(FragmentUserFavorite())
             }
 
             iconButtonRev.setOnClickListener {
                 stationName?.let { name ->
-                    val fragment = FragmentReviews.newInstance(name)
+                    val fragment = FragmentForFavoriteStationReviews.newInstance(name)
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.frameLayout, fragment)
                         .commit()
@@ -142,25 +141,37 @@ class StationFragment : Fragment() {
 
     private fun loadLikeState() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
-        userId?.let { id ->
+        userId?.let { userId ->
             val database = FirebaseDatabase.getInstance()
-            val userFavoritesRef = database.getReference("userFavorites").child(id)
-            val station = englishStationName
-            if (!station.isNullOrEmpty()) {
-                userFavoritesRef.child(station)
+            val userFavoritesRef = database.getReference("userFavorites").child(userId)
+            val stationName = englishStationName
+
+            if (!stationName.isNullOrEmpty()) {
+                // Получаем состояние лайка из базы данных
+                userFavoritesRef.child(stationName)
                     .addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
-                            val liked = dataSnapshot.exists() && dataSnapshot.getValue(Boolean::class.java) == true
+                            // Если в базе данных значение true, устанавливаем состояние лайка в true (заполненное состояние)
+                            val liked =
+                                dataSnapshot.exists() && dataSnapshot.getValue(Boolean::class.java) == true
                             isLiked = liked
+                            // Обновляем внешний вид кнопки
                             updateLikeButton()
                         }
 
                         override fun onCancelled(databaseError: DatabaseError) {
-                            Log.e(TAG, "Error reading data from database", databaseError.toException())
+                            Log.e(
+                                TAG,
+                                "Ошибка при чтении данных из базы данных",
+                                databaseError.toException()
+                            )
                         }
                     })
             } else {
-                Log.e(TAG, "Unable to determine like state: station name not defined")
+                Log.e(
+                    TAG,
+                    "Невозможно определить состояние избранного: название станции не определено"
+                )
             }
         }
     }
@@ -174,7 +185,7 @@ class StationFragment : Fragment() {
     companion object {
         const val ARG_STATION_NAME = "station_name"
         fun newInstance(stationName: String) =
-            StationFragment().apply {
+            FragmentForFavoriteStation().apply {
                 arguments = Bundle().apply {
                     putString(ARG_STATION_NAME, stationName)
                 }

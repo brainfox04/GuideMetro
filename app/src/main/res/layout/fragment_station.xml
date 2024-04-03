@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@color/md_theme_background">
 
     <TextView
         android:id="@+id/Header"
@@ -13,36 +13,73 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:text=""
+        android:textColor="@color/md_theme_primary"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iconButtonBack"/>
 
+    <TextView
+        android:id="@+id/Description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text=""
+        android:textColor="@color/md_theme_primary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/photoCarousel"/>
+
     <Button
         style="?attr/materialIconButtonStyle"
         android:id="@+id/iconButtonBack"
-        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/back"
         app:icon="@drawable/arrow_back_24px"
-        app:iconSize="30dp"
+        app:iconSize="35dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
         style="?attr/materialIconButtonStyle"
+        android:id="@+id/iconButtonRev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/review"
+        app:icon="@drawable/thumbs_up_down_24px"
+        app:iconSize="35dp"
+        app:layout_constraintEnd_toStartOf="@+id/iconButtonFav"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"/>
+
+
+    <ImageButton
         android:id="@+id/iconButtonFav"
-        android:layout_marginTop="5dp"
+        style="?attr/materialIconButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/fav"
-        app:icon="@drawable/favorite_24px"
-        app:iconSize="30dp"
+        android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"/>
+        app:srcCompat="@drawable/favorite_24px"
+        tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/actionReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/review"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/edit_24px"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/photoCarousel"

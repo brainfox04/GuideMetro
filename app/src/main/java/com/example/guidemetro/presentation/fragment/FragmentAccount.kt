@@ -34,6 +34,14 @@ class FragmentAccount : Fragment(){
         // Устанавливаем e-mail пользователя в TextView
         binding.userEmail.text = currentUser?.email ?: "Неизвестный пользователь"
 
+        binding.reviewButton.setOnClickListener {
+            replaceFragment(fragment = FragmentUserReviews())
+        }
+
+        binding.favoriteButton.setOnClickListener {
+            replaceFragment(fragment = FragmentUserFavorite())
+        }
+
         binding.signOutButton.setOnClickListener {
             // Выполнение выхода из учетной записи пользователя
             auth.signOut()
@@ -87,6 +95,8 @@ class FragmentAccount : Fragment(){
     }
 
     private fun updateTexts() {
+        binding.reviewButton.text = getString(R.string.myReview)
+        binding.favoriteButton.text = getString(R.string.myFavorite)
         binding.newsHeader.text = getString(R.string.account)
         binding.Email.text = getString(R.string.emailAccount)
         binding.signOutButton.text = getString(R.string.signOut)
