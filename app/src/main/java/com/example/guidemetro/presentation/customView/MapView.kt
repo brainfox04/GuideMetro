@@ -61,6 +61,8 @@ class MapView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
         scaleDetector = ScaleGestureDetector(context, ScaleListener())
         gestureDetector = GestureDetector(context, GestureListener())
+
+        translateY = -0.1f * screenHeight
     }
 
     private fun initializeStationNames() {
